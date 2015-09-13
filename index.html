@@ -1,0 +1,91 @@
+<html>	
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+	<body>
+		<div id="game">
+			<div id="board_container">
+				<div id="instructions" class="hidden">
+					<div id="controls_container">
+						<h3>Movement</h3>
+						<div class="controls">
+							<div class="control_wrapper">
+								<div class="left_arrow"></div>
+							</div>
+							<div class="control_wrapper">
+								<div class="down_arrow"></div>
+							</div>
+							<div class="control_wrapper">
+								<div class="right_arrow"></div>
+							</div>
+						</div>
+						<h3>Rotation</h3>
+						<div class="controls">
+							<div class="control_wrapper">
+								<a>Z</a>
+							</div>
+							<div class="control_wrapper">
+								<a>X</a>
+							</div>
+						</div>
+						<h3>Grid Size</h3>
+						<div class="controls">
+							<div class="control_wrapper input_field">
+								<!-- Columns -->
+								<input id="num_cols" type="number" name="quantity" min="10" max="60">
+							</div>
+							<div class="control_wrapper input_field">
+								<!-- Rows -->
+								<input id="num_rows" type="number" name="quantity" min="20" max="40">
+							</div>
+						</div>
+						<!-- <h3>To drop piece</h3>
+						<div>
+							<div class="enter_wrapper">
+								<a>enter</a>
+							</div>
+						</div> -->
+					</div>
+				</div>
+				<canvas id="board"></canvas>
+			</div>
+			<div id="info">
+				<div class="bottom_border">
+					<h2 id="restart" class="button">Restart</h2>
+				</div>
+				<div id="score_container">
+					<h2>Score</h2>
+					<a id="score" class="bottom_border"></a>
+				</div>
+				<div id="play_pause_container" class="button">
+					<div id="play_pause" class="pause"></div>
+				</div>
+				<div id="next_container">
+					<h2>Next</h2>
+					<canvas id="next"></canvas>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/libs/jquery-2.1.4.min.js"></script>
+		<script src="js/Piece.js"></script>
+		<script src="js/Game.js"></script>
+		<script src="js/DesktopControls.js"></script>
+		<script src="js/WebDisplay.js"></script>
+		<script src="js/WebTris.js"></script>
+		<script>
+
+			$(function() {
+				new WebTris();
+			});
+
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+

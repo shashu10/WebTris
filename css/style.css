@@ -1,0 +1,163 @@
+body:not(input) {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	color: rgb(250,250,250);
+	background-color: #1ABC9C;
+    margin-top: 0;
+
+    /* Disable selection */
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*  -   -   -   -    */
+
+    background-color: #3498db;
+
+    /* Background subtle gradient */
+    /*background: rgba(26,188,156,1);*/
+    /*background: -moz-linear-gradient(top, rgba(26,188,156,1) 0%, rgba(115,217,197,1) 100%);*/
+    /*background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(26,188,156,1)), color-stop(100%, rgba(115,217,197,1)));*/
+    /*background: -webkit-linear-gradient(top, rgba(26,188,156,1) 0%, rgba(115,217,197,1) 100%);*/
+    /*background: -o-linear-gradient(top, rgba(26,188,156,1) 0%, rgba(115,217,197,1) 100%);*/
+    /*background: -ms-linear-gradient(top, rgba(26,188,156,1) 0%, rgba(115,217,197,1) 100%);*/
+    /*background: linear-gradient(to bottom, rgba(26,188,156,1) 0%, rgba(115,217,197,1) 100%);*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1abc9c', endColorstr='#73d9c5', GradientType=0 );*/
+    /*  -   -   -   -   -   -   - */
+}
+a, h2, h3 {
+    cursor: default;
+}
+h2 {
+    margin: 10px;
+}
+.button {
+    background-color: #272727;
+    border-bottom: 2px solid #363636;
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#game {
+	display: table;
+	margin: auto;
+
+    /* Border with spacing */
+    border: 3px solid #272727;
+    border-top: 0;
+    border-radius: 0 0 14px 14px;
+    padding: 0 2px 2px 2px;
+    /*  -   -   -   -   -  */
+}
+#board_container {
+	float: left;
+    position: relative;
+    height: 100%;
+    background-color: rgb(6,6,6);
+    border-bottom-left-radius: 10px;
+    border: 3px solid #272727;
+}
+#board {
+    /*border: 3px solid #272727;*/
+    border-bottom-left-radius: 10px;
+}
+.controls {
+    display: flex;
+}
+#instructions {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(6,6,6,0.7);
+}
+#info {
+    background-color: rgb(6,6,6);
+    position: relative;
+	border: 3px solid #272727;
+	border-left: none;
+	width: 150px;
+	height: 100%;
+	text-align: center;
+    display: inline-block;
+    border-bottom-right-radius: 10px;
+}
+#score {
+    /*border-top: 3px solid #272727;*/
+    font-size: -webkit-xxx-large;
+    padding: 5px;
+    display: block;
+}
+#play_pause_container {
+    margin: 20px 48px;
+}
+.play {
+    margin: auto;
+    width: 0;
+    height: 0;
+    border-top: 16px solid transparent;
+    border-left: 24px solid #FFF;
+    border-bottom: 16px solid transparent;
+}
+.pause {
+    margin: auto;
+    width: 8px;
+    height: 32px;
+    border-right: 8px solid #FFF;
+    border-left: 8px solid #FFF;
+}
+.enter_wrapper {
+    border: 3px solid #272727;
+    border-radius: 4px;
+    margin: 10px;
+    padding: 10px;
+}
+.control_wrapper {
+    /*border: 3px solid #272727;*/
+    background-color: #272727;
+    border-radius: 4px;
+    margin: 10px;
+    width: 100%;
+    padding: 10px;
+}
+.left_arrow {
+    margin: auto;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-right: 16px solid #FFF;
+    border-bottom: 10px solid transparent;
+}
+.right_arrow {
+    margin: auto;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-left: 16px solid #FFF;
+    border-bottom: 10px solid transparent;
+}
+.down_arrow {
+    margin: auto;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-top: 16px solid #FFF;
+    border-right: 10px solid transparent;
+}
+.bottom_border {
+    border-bottom: 3px solid #272727;
+}
+.input_field {
+    background-color: white;
+    color: black;
+    padding: 0;
+    width: inherit;
+    margin: auto;
+}
+input {
+    height: 32px;
+    font-size: x-large;
+}
+.hidden {
+    display: none;
+}
