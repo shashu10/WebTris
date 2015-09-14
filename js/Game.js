@@ -1,22 +1,27 @@
 var GameEngine = (function() {
 
 	function GameEngine() { // add type later
+		this.color = { // Dark Gray
+			fill:"rgb(34,34,34)",
+			stroke:"rgb(6,6,6)"
+		};
 		this.listenForActions();
 		this.listenForSettings();
 		this.newGame();
 	}
 	GameEngine.prototype.newGame = function() {
-		this.isFinished = false;
-		this.score = 0;
 		this.newBoard();
-		this.piece = null;
-		this.nextPiece = null;
 		this.resetTimer();
+		this.score = 0;
+		this.piece = null;
+		this.isFinished = false;
 	};
 	GameEngine.prototype.resetTimer = function() {
 		var that = this;
 		window.clearInterval(timer);
+
 		timer = window.setInterval(function() {
+
 			if (!that.piece || that.pieceDidLand()) {
 				that.getNextPiece();
 				that.clearRows();
@@ -35,10 +40,11 @@ var GameEngine = (function() {
 				that.getNextPiece();
 				that.addPiece();
 			}
-			if (that.drawBoard)
-				that.drawBoard();
+			that.drawBoard();
 		}, 750);
 	};
+
+
 	GameEngine.prototype.listenForSettings = function() {
 		var that = this;
 		$("#num_cols").val(WIDTH);
@@ -89,13 +95,10 @@ var GameEngine = (function() {
 	GameEngine.prototype.play_pause = function() {
 		
 		if (isPaused) { // Play
-			if (NEW_WIDTH != WIDTH || NEW_HEIGHT != HEIGHT) {
+			if (NEW_WIDTH != WIDTH || NEW_HEIGHT != HEIGHT || this.isFinished) {
 				WIDTH = NEW_WIDTH;
 				HEIGHT = NEW_HEIGHT;
 				this.newGame();
-			}
-			if (this.isFinished) {
-				this.newGame();	
 			}
 
 			this.resetTimer();
@@ -138,8 +141,7 @@ var GameEngine = (function() {
 
 		this.nextPiece = new Piece();
 
-		if (this.drawNext)
-			this.drawNext();
+		this.drawNext();
 	};
 	GameEngine.prototype.canAddPiece = function() {
 		var that = this;
@@ -216,64 +218,6 @@ var GameEngine = (function() {
 		this.addPiece();
 		return didLand;
 	};
-
-	//	-	-	-	//
-	// CONTROLLER	//
-	//	-	-	-	//
-
-	GameEngine.prototype.drawBoard = function() {
-		var that = this;
-		var canvas = document.getElementById('board');
-		if (canvas.getContext) {
-			var ctx = canvas.getContext('2d');
-			that.eachBlock(function (row, col, block) {
-				var x = (col * PIECE_WIDTH);
-				var y = (row * PIECE_WIDTH);
-				if (block) {
-					ctx.strokeStyle = block.stroke;
-					ctx.strokeRect(x,y,PIECE_WIDTH,PIECE_WIDTH);
-					ctx.fillStyle = block.fill;
-					ctx.fillRect(x,y,PIECE_WIDTH,PIECE_WIDTH);
-				} else {
-					ctx.strokeStyle = that.color.stroke;
-					ctx.strokeRect(x,y,PIECE_WIDTH,PIECE_WIDTH);
-					ctx.fillStyle = that.color.fill;
-					ctx.fillRect(x,y,PIECE_WIDTH,PIECE_WIDTH);
-				}
-			});
-			that.updateScore();
-		}
-	};
-	GameEngine.prototype.drawNext = function() {
-		var that = this;
-		var canvas = document.getElementById('next');
-		if (canvas.getContext) {
-			var ctx = canvas.getContext('2d');
-
-			// Clear next piece background
-			for (var row = 0; row < PIECE_SIZE; row++) {
-				for (var col = 0; col < PIECE_SIZE; col++) {
-
-					var x = (col * PIECE_WIDTH);
-					var y = (row * PIECE_WIDTH);
-
-					ctx.clearRect(x,y,PIECE_WIDTH,PIECE_WIDTH);
-				}
-			}
-
-			// Show next piece
-			that.nextPiece.eachBlock(function (col, row) {
-
-				var x = (col * PIECE_WIDTH);
-				var y = (row * PIECE_WIDTH);	
-
-				ctx.strokeStyle = that.nextPiece.color.stroke;
-				ctx.strokeRect(x,y,PIECE_WIDTH,PIECE_WIDTH);
-				ctx.fillStyle = that.nextPiece.color.fill;
-				ctx.fillRect(x,y,PIECE_WIDTH,PIECE_WIDTH);
-			});
-		}
-	};
 	GameEngine.prototype.clearRows = function() {
 		var that = this;
 		var canvas = document.getElementById('board');
@@ -304,6 +248,56 @@ var GameEngine = (function() {
 			that.board[col][row] = (row === 0) ? false : that.board[col][row - 1];
 		});
 		that.shiftRowsAbove(row - 1);
+	};
+	GameEngine.prototype.drawBoard = function() {
+		var that = this;
+		var canvas = document.getElementById('board');
+		if (canvas.getContext) {
+			var ctx = canvas.getContext('2d');
+			that.eachBlock(function (row, col, block) {
+				var x = (col * PIECE_WIDTH);
+				var y = (row * PIECE_WIDTH);
+				if (block) {
+					ctx.strokeStyle = block.stroke;
+					ctx.fillStyle = block.fill;
+				} else {
+					ctx.strokeStyle = that.color.stroke;
+					ctx.fillStyle = that.color.fill;
+				}
+				ctx.strokeRect(x,y,PIECE_WIDTH,PIECE_WIDTH);
+				ctx.fillRect(x,y,PIECE_WIDTH,PIECE_WIDTH);
+			});
+			that.updateScore();
+		}
+	};
+	GameEngine.prototype.drawNext = function() {
+		var that = this;
+		var canvas = document.getElementById('next');
+		if (canvas.getContext) {
+			var ctx = canvas.getContext('2d');
+
+			// Clear next piece background
+			for (var row = 0; row < PIECE_SIZE; row++) {
+				for (var col = 0; col < PIECE_SIZE; col++) {
+
+					var x = (col * PIECE_WIDTH);
+					var y = (row * PIECE_WIDTH);
+
+					ctx.clearRect(x,y,PIECE_WIDTH,PIECE_WIDTH);
+				}
+			}
+			// Show next piece
+			that.nextPiece.eachBlock(function (col, row) {
+
+				var x = (col * PIECE_WIDTH);
+				var y = (row * PIECE_WIDTH);	
+
+				ctx.strokeStyle = that.nextPiece.color.stroke;
+				ctx.strokeRect(x,y,PIECE_WIDTH,PIECE_WIDTH);
+				ctx.fillStyle = that.nextPiece.color.fill;
+				ctx.fillRect(x,y,PIECE_WIDTH,PIECE_WIDTH);
+			});
+		}
 	};
 	GameEngine.prototype.updateScore = function() {
 		$("#score").html(this.score);

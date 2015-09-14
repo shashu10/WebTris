@@ -11,10 +11,8 @@ var isPaused = false;
 var WebTris = (function() {
 
 	function WebTris() {
-		this.gameEngine = new GameEngine();
-		// Add a different interface for hybrid apps
-		new DesktopControls(this.gameEngine);
-		new WebDisplay(this.gameEngine);
+		// Add a different controls for hybrid apps
+		new DesktopControls(new GameEngine());
 	}
 	
 	return WebTris;
