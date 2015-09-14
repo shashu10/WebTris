@@ -10,11 +10,11 @@ var GameEngine = (function() {
 		this.newGame();
 	}
 	GameEngine.prototype.newGame = function() {
-		this.newBoard();
-		this.resetTimer();
 		this.score = 0;
 		this.piece = null;
 		this.isFinished = false;
+		this.newBoard();
+		this.resetTimer();
 	};
 	GameEngine.prototype.resetTimer = function() {
 		var that = this;
