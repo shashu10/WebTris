@@ -79,7 +79,7 @@ h2 {
 	width: 150px;
 	height: 100%;
 	text-align: center;
-    display: inline-block;
+    display: grid;
     border-bottom-right-radius: 10px;
 }
 #score {
